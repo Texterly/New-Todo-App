@@ -1,0 +1,28 @@
+.todos {
+  display: flex;
+  width: 700px;
+  height: 40px;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+  background-color: chartreuse;
+  border: 1px solid #000000;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 10px;
+  .text {
+    width: 20px;
+    height: 20px;
+  }
+  .remove {
+    border: 1px solid #000000;
+    border-radius: 20px;
+    padding: 5px;
+    background-color: #ff0000;
+    cursor: pointer;
+  }
+}
+
+.done .content {
+  text-decoration: line-through;
+}

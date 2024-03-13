@@ -1,0 +1,28 @@
+<h1>Todo List</h1>
+
+<form action="#">
+  <input type="text" name="title" [(ngModel)]="addTaskValue" />
+  <button [disabled]="!addTaskValue" (click)="addTodo()">Add new task</button>
+</form>
+
+<ul>
+  <li
+    *ngFor="let todo of todos"
+    class="todos {{ todo.completed ? 'done' : '' }}"
+  >
+    <input
+      type="checkbox"
+      name="isCompleted"
+      (click)="todo.completed = !todo.completed"
+      class="text"
+      [checked]="todo.completed"
+    />
+    <a [routerLink]="['/task', todo.id]">{{ todo.title }}</a>
+    <span *ngIf="!todo.completed" class="content">{{ todo.title }}</span>
+    <span *ngIf="todo.completed"
+      ><del>{{ todo.title }}</del></span
+    >
+    <span>userId: {{ todo.userId }}</span>
+    <div class="remove" (click)="deleteTodo(todo)">Delete</div>
+  </li>
+</ul>

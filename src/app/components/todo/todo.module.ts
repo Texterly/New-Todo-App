@@ -4,14 +4,14 @@ import { TodoComponent } from './todo.component';
 import { RouterModule, Routes } from '@angular/router';
 import { TodoFormComponent } from '../todo-form/todo-form.component';
 import { FormsModule } from '@angular/forms';
+import { UserComponent } from '../user/user.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/tasks', pathMatch: 'full' },
   { path: 'tasks', component: TodoComponent },
-  { path: 'task/:id', component: TodoFormComponent },
+  { path: 'task', component: TodoFormComponent },
 
-  // { path: '', component: TodoComponent },
-  // { path: 'add', component: TodoFormComponent },
+  { path: 'user/:userId', component: UserComponent },
 ];
 
 @NgModule({

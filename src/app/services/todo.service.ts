@@ -23,6 +23,11 @@ export class TodoService {
     return this.http.delete<Todo>(this.apiURL + '/' + todo.id);
   }
 
+  filterDone(filter: any) {
+    this.todos = this.todos.filter((todo) => todo.userId === filter.userId);
+    console.log(this.todos);
+  }
+
   // editTodo(todo: Todo): Observable<Todo> {
   //   return this.http.put<Todo>(this.apiURL + '/' + todo.id, todo);
   // }

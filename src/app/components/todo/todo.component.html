@@ -1,28 +1,45 @@
-<h1>Todo List</h1>
+<div class="header">
+  <h1>Todo List</h1>
+</div>
 
-<form action="#">
-  <input type="text" name="title" [(ngModel)]="addTaskValue" />
-  <button [disabled]="!addTaskValue" (click)="addTodo()">Add new task</button>
-</form>
+<div class="form">
+  <form action="#">
+    <input type="text" name="title" [(ngModel)]="addTaskValue" />
+    <button [disabled]="!addTaskValue" (click)="addTodo()">Add new task</button>
+  </form>
+  <button (click)="back()">Back</button>
+</div>
 
-<ul>
-  <li
-    *ngFor="let todo of todos"
-    class="todos {{ todo.completed ? 'done' : '' }}"
-  >
-    <input
-      type="checkbox"
-      name="isCompleted"
-      (click)="todo.completed = !todo.completed"
-      class="text"
-      [checked]="todo.completed"
-    />
-    <a [routerLink]="['/task', todo.id]">{{ todo.title }}</a>
-    <span *ngIf="!todo.completed" class="content">{{ todo.title }}</span>
-    <span *ngIf="todo.completed"
-      ><del>{{ todo.title }}</del></span
+<div class="list">
+  <ul>
+    <li
+      *ngFor="let todo of todos"
+      class="todos {{ todo.completed ? 'done' : '' }}"
     >
-    <span>userId: {{ todo.userId }}</span>
-    <div class="remove" (click)="deleteTodo(todo)">Delete</div>
-  </li>
-</ul>
+      <div class="checkbox">
+        <input
+          type="checkbox"
+          name="isCompleted"
+          (click)="todo.completed = !todo.completed"
+          class="checkbox-text"
+          [checked]="todo.completed"
+        />
+      </div>
+      <div class="id">
+        <a [routerLink]="['/task', todo]">id: {{ todo.id }}</a>
+      </div>
+      <div class="todo">
+        <span *ngIf="!todo.completed" class="content">{{ todo.title }}</span>
+      </div>
+      <div class="todo">
+        <span *ngIf="todo.completed"
+          ><del>{{ todo.title }}</del></span
+        >
+      </div>
+      <div class="userId" (click)="filterDone(todo)">
+        <span>userId: {{ todo.userId }}</span>
+      </div>
+      <div class="remove" (click)="deleteTodo(todo)">Delete</div>
+    </li>
+  </ul>
+</div>

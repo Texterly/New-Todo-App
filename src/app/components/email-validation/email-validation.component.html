@@ -1,0 +1,19 @@
+<div class="card-body">
+  <form [formGroup]="form">
+    <div class="form-group">
+      <label>Enter email:</label>
+      <input
+        type="text"
+        formControlName="email"
+        placeholder="Enter email"
+        class="form-control"
+      />
+      <label class="text-danger" *ngIf="getError(form.get('email'))">
+        {{ getError(form.get("email")) }}
+      </label>
+    </div>
+    <div class="mt-2">
+      <button class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+</div>

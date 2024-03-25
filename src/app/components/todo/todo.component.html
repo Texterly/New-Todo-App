@@ -6,6 +6,8 @@
   <form action="#">
     <input type="text" name="title" [(ngModel)]="addTaskValue" />
     <button [disabled]="!addTaskValue" (click)="addTodo()">Add new task</button>
+    <input type="text" name="userId" [(ngModel)]="userIdFilter" />
+    <button (click)="updateData()">Search userId</button>
   </form>
   <button (click)="back()">Back</button>
 </div>

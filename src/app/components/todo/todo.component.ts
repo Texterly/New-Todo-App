@@ -9,17 +9,18 @@ import { TodoService } from 'src/app/services/todo.service';
   styleUrls: ['./todo.component.scss'],
 })
 export class TodoComponent implements OnInit {
-  todos = this.todoService.todos;
+  todos: Todo[];
   addTaskValue: string = '';
   userId: number;
-  // editTaskValue: string = '';
+  userIdFilter: string;
+  products: any;
 
   constructor(private todoService: TodoService, private location: Location) {}
 
   ngOnInit(): void {
-    // this.editTaskValue = '';
     this.todoService.getTodos().subscribe((todos) => {
       this.todos = todos;
+      console.log(this.todos);
     });
   }
 
@@ -53,20 +54,11 @@ export class TodoComponent implements OnInit {
     console.log(this.todos);
   }
 
-  // editTodo() {
-  //   const todo = {
-  //     userId: 1,
-  //     id: this.todos.length + 1,
-  //     title: this.editTaskValue,
-  //     completed: false,
-  //   };
-  //   this.todoService.editTodo(todo).subscribe((res) => {
-  //     this.ngOnInit;
-  //   });
-  // }
-
-  // call(todo: any) {
-  //   this.todos = todo;
-  //   this.editTaskValue = todo.title;
-  // }
+  updateData() {
+    this.todoService.getTodos(this.userIdFilter).subscribe((data) => {
+      console.log(data);
+      this.todos = data;
+      console.log(data);
+    });
+  }
 }

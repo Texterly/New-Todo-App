@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Todo } from '../interfaces/todo';
 
@@ -11,8 +11,15 @@ export class TodoService {
 
   private apiURL = 'https://jsonplaceholder.typicode.com/todos';
   constructor(private http: HttpClient) {}
-  getTodos(): Observable<Todo[]> {
-    return this.http.get<any>(this.apiURL);
+
+  getTodos(userId?: string): Observable<Todo[]> {
+    console.log(userId);
+
+    if (userId) {
+      return this.http.get<any>(this.apiURL, {
+        params: new HttpParams().set('userId', userId).set('_limit', '10'),
+      });
+    } else return this.http.get<any>(this.apiURL);
   }
 
   addTodo(todo: Todo): Observable<Todo> {

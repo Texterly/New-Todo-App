@@ -8,6 +8,8 @@
     <button [disabled]="!addTaskValue" (click)="addTodo()">Add new task</button>
     <input type="text" name="userId" [(ngModel)]="userIdFilter" />
     <button (click)="updateData()">Search userId</button>
+    <!-- <input type="text" name="editTitle" [(ngModel)]="todo.title" /> -->
+    <label for="editTitle">Change task</label>
   </form>
   <button (click)="back()">Back</button>
 </div>
@@ -41,6 +43,8 @@
       <div class="userId" (click)="filterDone(todo)">
         <span>userId: {{ todo.userId }}</span>
       </div>
+      <!-- <button (click)="editTodo(todo.id, todo.title)">edit</button> -->
+      <input [(ngModel)]="todo.title" (blur)="editTodo(todo.id, todo.title)" />
       <div class="remove" (click)="deleteTodo(todo)">Delete</div>
     </li>
   </ul>

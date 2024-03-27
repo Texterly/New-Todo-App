@@ -13,8 +13,6 @@ export class TodoService {
   constructor(private http: HttpClient) {}
 
   getTodos(userId?: string): Observable<Todo[]> {
-    console.log(userId);
-
     if (userId) {
       return this.http.get<any>(this.apiURL, {
         params: new HttpParams().set('userId', userId).set('_limit', '10'),
@@ -35,7 +33,15 @@ export class TodoService {
     console.log(this.todos);
   }
 
-  // editTodo(todo: Todo): Observable<Todo> {
-  //   return this.http.put<Todo>(this.apiURL + '/' + todo.id, todo);
-  // }
+  editTodo(id: number, newTitle: string): void {
+    const todoIndex = this.todos.findIndex((todo) => todo.id === id);
+    if (todoIndex !== -1) {
+      this.todos[todoIndex].title = newTitle;
+    }
+  }
+
+  //   editTodo(todo: any, id: number): Observable<Todo> {
+  //     console.log(id);
+  //     return this.http.put<Todo>(`${this.apiURL}/${id}`, todo);
+  //   }
 }

@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { mergeMap, pipe } from 'rxjs';
 import { Todo } from 'src/app/interfaces/todo';
 import { TodoService } from 'src/app/services/todo.service';
 
@@ -13,7 +14,10 @@ export class TodoComponent implements OnInit {
   addTaskValue: string = '';
   userId: number;
   userIdFilter: string;
+  editTitle: string;
   products: any;
+  id: number;
+  completed: boolean;
 
   constructor(private todoService: TodoService, private location: Location) {}
 
@@ -56,9 +60,24 @@ export class TodoComponent implements OnInit {
 
   updateData() {
     this.todoService.getTodos(this.userIdFilter).subscribe((data) => {
-      console.log(data);
       this.todos = data;
-      console.log(data);
     });
   }
+
+  editTodo(id: number, editTitle: string): void {
+    this.todoService.editTodo(id, editTitle);
+  }
+
+  // editTodo(value: Todo): void {
+  //   this.todoService
+  //     .editTodo({ title: this.editTitle }, value.id)
+  //     .pipe(mergeMap(() => this.todoService.getTodos()))
+  //     .subscribe((data) => {
+  //       this.todos = data;
+  //     });
+  //   console.log(this.editTitle);
+  //   console.log(value.id);
+  //   console.log(this.todos);
+  //   this.editTitle = '';
+  // }
 }

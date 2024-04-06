@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Todo } from '../interfaces/todo';
 
 @Injectable({
@@ -18,6 +18,22 @@ export class TodoService {
         params: new HttpParams().set('userId', userId).set('_limit', '10'),
       });
     } else return this.http.get<any>(this.apiURL);
+  }
+
+  getUserTodos(userId: string|number): Observable<Todo[]> {
+    if (typeof userId === 'string') {
+      userId = +userId;
+    }
+
+    return this.http.get<Todo[]>(this.apiURL).pipe(
+      map((allTodos: Todo[]) => allTodos.filter((todo: Todo) => todo.userId === userId))
+    );
+  }
+
+  getTodoById(id: string): Observable<Todo> {
+    return this.http.get<Todo[]>(`${this.apiURL}?id=${id}`).pipe(
+      map((todos: Todo[]) => todos[0]),
+    );
   }
 
   addTodo(todo: Todo): Observable<Todo> {

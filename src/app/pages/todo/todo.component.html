@@ -1,3 +1,4 @@
+
 <div class="header">
   <h1>Todo List</h1>
 </div>
@@ -9,10 +10,20 @@
     <input type="text" name="userId" [(ngModel)]="userIdFilter" />
     <button (click)="updateData()">Search userId</button>
     <!-- <input type="text" name="editTitle" [(ngModel)]="todo.title" /> -->
-    <label for="editTitle">Change task</label>
+<!--    <label for="editTitle">Change task</label>-->
   </form>
   <button (click)="back()">Back</button>
 </div>
+
+<!--todo delete-->
+<ng-container *ngIf="todos$ | async as todos">
+  <ng-container *ngIf="!!todos && todos.length > 0; else displayNoEntries">
+<!--    todos-->
+  </ng-container>
+  <ng-template #displayNoEntries>
+<!--    no entries-->
+  </ng-template>
+</ng-container>
 
 <div class="list">
   <ul>
@@ -30,7 +41,7 @@
         />
       </div>
       <div class="id">
-        <a [routerLink]="['/task', todo]">id: {{ todo.id }}</a>
+        <a [routerLink]="['/tasks', todo.id]">id: {{ todo.id }}</a>
       </div>
       <div class="todo">
         <span *ngIf="!todo.completed" class="content">{{ todo.title }}</span>
@@ -40,9 +51,9 @@
           ><del>{{ todo.title }}</del></span
         >
       </div>
-      <div class="userId" (click)="filterDone(todo)">
+      <a [routerLink]="['/tasks', 'user', todo.userId]" class="userId">
         <span>userId: {{ todo.userId }}</span>
-      </div>
+      </a>
       <!-- <button (click)="editTodo(todo.id, todo.title)">edit</button> -->
       <input [(ngModel)]="todo.title" (blur)="editTodo(todo.id, todo.title)" />
       <div class="remove" (click)="deleteTodo(todo)">Delete</div>

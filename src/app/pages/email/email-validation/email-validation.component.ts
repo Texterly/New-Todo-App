@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
@@ -10,6 +10,7 @@ import {
   selector: 'app-email-validation',
   templateUrl: './email-validation.component.html',
   styleUrls: ['./email-validation.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EmailValidationComponent implements OnInit {
   form: FormGroup = new FormGroup({

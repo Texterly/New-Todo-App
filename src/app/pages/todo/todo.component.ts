@@ -1,17 +1,24 @@
 import { Location } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Todo } from 'src/app/interfaces/todo';
+import { AuthGoogleService } from 'src/app/services/google-api.service';
 import { TodoService } from 'src/app/services/todo.service';
 
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoComponent implements OnInit {
-  todos$: Observable<Todo[]> =this.todoService.getTodos();
+  todos$: Observable<Todo[]> = this.todoService.getTodos();
   todos: Todo[];
   addTaskValue: string = '';
   userId: number;
@@ -20,8 +27,15 @@ export class TodoComponent implements OnInit {
   products: any;
   id: number;
   completed: boolean;
+  profile: any;
 
-  constructor(private todoService: TodoService, private location: Location, private cd: ChangeDetectorRef) {}
+  constructor(
+    private todoService: TodoService,
+    private location: Location,
+    private cd: ChangeDetectorRef,
+    private authService: AuthGoogleService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.todoService.getTodos().subscribe((todos) => {
@@ -29,6 +43,16 @@ export class TodoComponent implements OnInit {
       this.cd.markForCheck();
       console.log(this.todos);
     });
+    this.showData();
+  }
+  showData() {
+    this.profile = this.authService.getProfile();
+    console.log(this.profile);
+  }
+
+  logOut() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
   addTodo() {
@@ -55,11 +79,6 @@ export class TodoComponent implements OnInit {
   back(): void {
     this.location.back();
   }
-
-  // filterDone(filter: any) {
-  //   this.todos = this.todos.filter((todo) => todo.userId === filter.userId);
-  //   console.log(this.todos);
-  // }
 
   updateData() {
     this.todoService.getTodos(this.userIdFilter).subscribe((data) => {

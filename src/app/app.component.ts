@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+// import { GoogleApiService, UserInfo } from './services/google-api.service';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,20 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 })
 export class AppComponent {
   title = 'todo-app';
+
+  // userInfo?: UserInfo;
+
+  // constructor(private readonly googleApi: GoogleApiService) {
+  //   googleApi.userProfileSubject.subscribe((info) => {
+  //     this.userInfo = info;
+  //   });
+  // }
+
+  // isLoggedIn(): boolean {
+  //   return this.googleApi.isLoggedIn();
+  // }
+
+  // logout() {
+  //   this.googleApi.signOut();
+  // }
 }

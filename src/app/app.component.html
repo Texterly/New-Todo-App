@@ -2,6 +2,17 @@
   <a routerLink="tasks" routerLinkActive="active">Tasks</a>
   <a routerLink="email" routerLinkActive="active">Email</a>
   <a routerLink="user" routerLinkActive="active">User</a>
+  <a routerLink="login" routerLinkActive="active">Login</a>
 </nav>
+
+<!-- <div *ngIf="isLoggedIn()">
+  <div class="container">Hi and welcome!</div>
+  <div class="container">Name: {{ userInfo?.info?.name }}</div>
+  <div class="container">Email: {{ userInfo?.info?.email }}</div>
+  <div class="container"><img src="{{ userInfo?.info?.picture }}" /></div>
+  <div class="container">
+    <button (click)="logout()">Logout from Google</button>
+  </div>
+</div> -->
 
 <router-outlet></router-outlet>

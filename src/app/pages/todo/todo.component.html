@@ -1,3 +1,4 @@
+<button (click)="logOut()">LogOut</button>
 
 <div class="header">
   <h1>Todo List</h1>
@@ -9,8 +10,6 @@
     <button [disabled]="!addTaskValue" (click)="addTodo()">Add new task</button>
     <input type="text" name="userId" [(ngModel)]="userIdFilter" />
     <button (click)="updateData()">Search userId</button>
-    <!-- <input type="text" name="editTitle" [(ngModel)]="todo.title" /> -->
-<!--    <label for="editTitle">Change task</label>-->
   </form>
   <button (click)="back()">Back</button>
 </div>
@@ -18,10 +17,10 @@
 <!--todo delete-->
 <ng-container *ngIf="todos$ | async as todos">
   <ng-container *ngIf="!!todos && todos.length > 0; else displayNoEntries">
-<!--    todos-->
+    <!--    todos-->
   </ng-container>
   <ng-template #displayNoEntries>
-<!--    no entries-->
+    <!--    no entries-->
   </ng-template>
 </ng-container>
 

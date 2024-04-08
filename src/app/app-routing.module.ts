@@ -2,14 +2,8 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
-import { TodoComponent } from './pages/todo/todo.component';
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   redirectTo: 'tasks',
-  //   pathMatch: 'full',
-  // },
   {
     path: '',
     redirectTo: 'login',

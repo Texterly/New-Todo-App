@@ -24,7 +24,7 @@
   </ng-template>
 </ng-container>
 
-<div class="list">
+<!-- <div class="list">
   <ul>
     <li
       *ngFor="let todo of todos"
@@ -53,9 +53,82 @@
       <a [routerLink]="['/tasks', 'user', todo.userId]" class="userId">
         <span>userId: {{ todo.userId }}</span>
       </a>
-      <!-- <button (click)="editTodo(todo.id, todo.title)">edit</button> -->
       <input [(ngModel)]="todo.title" (blur)="editTodo(todo.id, todo.title)" />
       <div class="remove" (click)="deleteTodo(todo)">Delete</div>
     </li>
   </ul>
+</div> -->
+
+<div class="example-container">
+  <h2>To do</h2>
+
+  <div
+    cdkDropList
+    #todoList="cdkDropList"
+    [cdkDropListData]="todos"
+    [cdkDropListConnectedTo]="[doneList]"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <ul>
+      <li class="example-box" *ngFor="let todo of todos" cdkDrag>
+        <div class="id">
+          <a [routerLink]="['/tasks', todo.id]">id: {{ todo.id }}</a>
+        </div>
+        <div class="todo">
+          <span *ngIf="!todo.completed" class="content">{{ todo.title }}</span>
+        </div>
+        <div class="todo">
+          <span *ngIf="todo.completed"
+            ><del>{{ todo.title }}</del></span
+          >
+        </div>
+        <a [routerLink]="['/tasks', 'user', todo.userId]" class="userId">
+          <span>userId: {{ todo.userId }}</span>
+        </a>
+        <input
+          [(ngModel)]="todo.title"
+          (blur)="editTodo(todo.id, todo.title)"
+        />
+        <div class="remove" (click)="deleteTodo(todo)">Delete</div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="example-container">
+  <h2>Done</h2>
+
+  <div
+    cdkDropList
+    #doneList="cdkDropList"
+    [cdkDropListData]="done"
+    [cdkDropListConnectedTo]="[todoList]"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <ul>
+      <li class="example-box" *ngFor="let todo of done" cdkDrag>
+        <div class="id">
+          <a [routerLink]="['/tasks', todo.id]">id: {{ todo.id }}</a>
+        </div>
+        <div class="todo">
+          <span *ngIf="!todo.completed" class="content">{{ todo.title }}</span>
+        </div>
+        <div class="todo">
+          <span *ngIf="todo.completed"
+            ><del>{{ todo.title }}</del></span
+          >
+        </div>
+        <a [routerLink]="['/tasks', 'user', todo.userId]" class="userId">
+          <span>userId: {{ todo.userId }}</span>
+        </a>
+        <input
+          [(ngModel)]="todo.title"
+          (blur)="editTodo(todo.id, todo.title)"
+        />
+        <div class="remove" (click)="deleteTodo(todo)">Delete</div>
+      </li>
+    </ul>
+  </div>
 </div>

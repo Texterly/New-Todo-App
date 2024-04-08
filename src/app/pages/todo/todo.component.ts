@@ -10,6 +10,11 @@ import { Observable } from 'rxjs';
 import { Todo } from 'src/app/interfaces/todo';
 import { AuthGoogleService } from 'src/app/services/google-api.service';
 import { TodoService } from 'src/app/services/todo.service';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-todo',
@@ -28,6 +33,7 @@ export class TodoComponent implements OnInit {
   id: number;
   completed: boolean;
   profile: any;
+  done: Todo[] = [];
 
   constructor(
     private todoService: TodoService,
@@ -45,6 +51,24 @@ export class TodoComponent implements OnInit {
     });
     this.showData();
   }
+
+  drop(event: CdkDragDrop<Todo[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
+  }
+
   showData() {
     this.profile = this.authService.getProfile();
     console.log(this.profile);

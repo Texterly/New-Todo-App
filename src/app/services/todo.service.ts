@@ -17,23 +17,30 @@ export class TodoService {
       return this.http.get<any>(this.apiURL, {
         params: new HttpParams().set('userId', userId).set('_limit', '10'),
       });
-    } else return this.http.get<any>(this.apiURL);
+    } else
+      return this.http.get<any>(this.apiURL, {
+        params: new HttpParams().set('_limit', '10'),
+      });
   }
 
-  getUserTodos(userId: string|number): Observable<Todo[]> {
+  getUserTodos(userId: string | number): Observable<Todo[]> {
     if (typeof userId === 'string') {
       userId = +userId;
     }
 
-    return this.http.get<Todo[]>(this.apiURL).pipe(
-      map((allTodos: Todo[]) => allTodos.filter((todo: Todo) => todo.userId === userId))
-    );
+    return this.http
+      .get<Todo[]>(this.apiURL)
+      .pipe(
+        map((allTodos: Todo[]) =>
+          allTodos.filter((todo: Todo) => todo.userId === userId)
+        )
+      );
   }
 
   getTodoById(id: string): Observable<Todo> {
-    return this.http.get<Todo[]>(`${this.apiURL}?id=${id}`).pipe(
-      map((todos: Todo[]) => todos[0]),
-    );
+    return this.http
+      .get<Todo[]>(`${this.apiURL}?id=${id}`)
+      .pipe(map((todos: Todo[]) => todos[0]));
   }
 
   addTodo(todo: Todo): Observable<Todo> {

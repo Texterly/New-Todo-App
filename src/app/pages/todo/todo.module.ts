@@ -6,6 +6,7 @@ import { TodoFormComponent } from './sub-pages/todo-form/todo-form.component';
 import { FormsModule } from '@angular/forms';
 import { UserTodosComponent } from './sub-pages/user-todos/user-todos.component';
 import { BackButtonComponent } from '../../common/back-button/back-button.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 const routes: Routes = [
   { path: '', component: TodoComponent },
@@ -14,16 +15,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
-    TodoComponent,
-    TodoFormComponent,
-    UserTodosComponent
-  ],
+  declarations: [TodoComponent, TodoFormComponent, UserTodosComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     FormsModule,
-    BackButtonComponent
+    BackButtonComponent,
+    DragDropModule,
   ],
 })
 export class TodoModule {}

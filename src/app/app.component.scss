@@ -1,15 +1,21 @@
 :host {
-
   nav {
     margin-bottom: 36px;
   }
 
-  a  {
+  a {
     margin-right: 16px;
     padding: 8px;
   }
 
   nav > a.active {
     background: lightgray;
+  }
+
+  .active {
+    text-decoration: none;
+  }
+  .example-spacer {
+    flex: 1 1 auto;
   }
 }

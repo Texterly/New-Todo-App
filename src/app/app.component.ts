@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-// import { GoogleApiService, UserInfo } from './services/google-api.service';
+import { Router } from '@angular/router';
+import { AuthGoogleService } from './services/google-api.service';
 
 @Component({
   selector: 'app-root',
@@ -8,21 +9,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
+  constructor(private authService: AuthGoogleService, private router: Router) {}
   title = 'todo-app';
 
-  // userInfo?: UserInfo;
-
-  // constructor(private readonly googleApi: GoogleApiService) {
-  //   googleApi.userProfileSubject.subscribe((info) => {
-  //     this.userInfo = info;
-  //   });
-  // }
-
-  // isLoggedIn(): boolean {
-  //   return this.googleApi.isLoggedIn();
-  // }
-
-  // logout() {
-  //   this.googleApi.signOut();
-  // }
+  logOut() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
 }

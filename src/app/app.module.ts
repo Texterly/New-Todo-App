@@ -8,6 +8,10 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { BackButtonComponent } from './common/back-button/back-button.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OAuthModule } from 'angular-oauth2-oidc';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent],
@@ -18,6 +22,10 @@ import { OAuthModule } from 'angular-oauth2-oidc';
     BackButtonComponent,
     BrowserAnimationsModule,
     OAuthModule.forRoot(),
+    MatMenuModule,
+    MatButtonModule,
+    MatIconModule,
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

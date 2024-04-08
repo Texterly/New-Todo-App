@@ -15,12 +15,16 @@ export class TodoService {
   getTodos(userId?: string): Observable<Todo[]> {
     if (userId) {
       return this.http.get<any>(this.apiURL, {
-        params: new HttpParams().set('userId', userId).set('_limit', '10'),
+        params: new HttpParams().set('userId', userId),
+        // .set('_limit', '10'),
       });
     } else
-      return this.http.get<any>(this.apiURL, {
-        params: new HttpParams().set('_limit', '10'),
-      });
+      return this.http.get<any>(
+        this.apiURL
+        //   , {
+        //   params: new HttpParams().set('_limit', '10'),
+        // }
+      );
   }
 
   getUserTodos(userId: string | number): Observable<Todo[]> {
@@ -33,6 +37,26 @@ export class TodoService {
       .pipe(
         map((allTodos: Todo[]) =>
           allTodos.filter((todo: Todo) => todo.userId === userId)
+        )
+      );
+  }
+
+  getCompletedTodos(): Observable<Todo[]> {
+    return this.http
+      .get<Todo[]>(this.apiURL)
+      .pipe(
+        map((allTods: Todo[]) =>
+          allTods.filter((todo: Todo) => todo.completed === true)
+        )
+      );
+  }
+
+  getUncompletedTodos(): Observable<Todo[]> {
+    return this.http
+      .get<Todo[]>(this.apiURL)
+      .pipe(
+        map((allTods: Todo[]) =>
+          allTods.filter((todo: Todo) => todo.completed === false)
         )
       );
   }
@@ -53,7 +77,6 @@ export class TodoService {
 
   filterDone(filter: any) {
     this.todos = this.todos.filter((todo) => todo.userId === filter.userId);
-    console.log(this.todos);
   }
 
   editTodo(id: number, newTitle: string): void {

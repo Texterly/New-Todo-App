@@ -37,7 +37,6 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
-      // TODO show NoPreloadWork
       preloadingStrategy: PreloadAllModules,
     }),
   ],

@@ -37,14 +37,18 @@ export class TodoComponent implements OnInit {
 
   constructor(
     private todoService: TodoService,
-    private location: Location,
     private cd: ChangeDetectorRef,
     private authService: AuthGoogleService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.todoService.getTodos().subscribe((todos) => {
+    this.todoService.getCompletedTodos().subscribe((todos) => {
+      this.done = todos;
+      this.cd.markForCheck();
+      console.log(this.todos);
+    });
+    this.todoService.getUncompletedTodos().subscribe((todos) => {
       this.todos = todos;
       this.cd.markForCheck();
       console.log(this.todos);
@@ -71,7 +75,6 @@ export class TodoComponent implements OnInit {
 
   showData() {
     this.profile = this.authService.getProfile();
-    console.log(this.profile);
   }
 
   logOut() {
@@ -89,7 +92,7 @@ export class TodoComponent implements OnInit {
     this.todoService.addTodo(todo).subscribe(() => {
       this.todos.push(todo);
       console.log(todo);
-
+      this.cd.markForCheck();
       this.addTaskValue = '';
     });
   }
@@ -97,16 +100,16 @@ export class TodoComponent implements OnInit {
   deleteTodo(todoOnDelete: Todo) {
     this.todoService.deleteTodo(todoOnDelete).subscribe(() => {
       this.todos = this.todos.filter((todo) => todo.id !== todoOnDelete.id);
+      this.done = this.done.filter((todo) => todo.id !== todoOnDelete.id);
+      this.cd.markForCheck();
     });
-  }
-
-  back(): void {
-    this.location.back();
   }
 
   updateData() {
     this.todoService.getTodos(this.userIdFilter).subscribe((data) => {
       this.todos = data;
+      this.done = data;
+      this.cd.markForCheck();
     });
   }
 

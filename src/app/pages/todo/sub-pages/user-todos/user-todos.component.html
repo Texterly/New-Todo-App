@@ -1,8 +1,7 @@
-<app-back-button [routerLink]="['/tasks']"/>
+<app-back-button [routerLink]="['/tasks']" />
 
 <ng-container *ngIf="!loading; else loadingTemplate">
   <div>
-    <!-- <p>userId: {{ todo.userId }}</p> -->
     <ul>
       <li *ngFor="let todo of todos">
         <p>Tasks {{ todo.title }}</p>
@@ -12,5 +11,7 @@
 </ng-container>
 
 <ng-template #loadingTemplate>
-  <h2>Loading....</h2>
+  <div class="spinner">
+    <mat-spinner></mat-spinner>
+  </div>
 </ng-template>

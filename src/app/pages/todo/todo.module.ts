@@ -7,6 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { UserTodosComponent } from './sub-pages/user-todos/user-todos.component';
 import { BackButtonComponent } from '../../common/back-button/back-button.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const routes: Routes = [
   { path: '', component: TodoComponent },
@@ -22,6 +24,8 @@ const routes: Routes = [
     FormsModule,
     BackButtonComponent,
     DragDropModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class TodoModule {}

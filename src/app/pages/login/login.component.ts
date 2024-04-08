@@ -9,7 +9,6 @@ import { AuthGoogleService } from 'src/app/services/google-api.service';
 })
 export class LoginComponent {
   constructor(private authService: AuthGoogleService) {}
-  // private authService = inject(AuthGoogleService);
 
   signInWithGoogle() {
     this.authService.login();

@@ -18,6 +18,7 @@ import { Observable, take } from 'rxjs';
 export class TodoFormComponent implements OnInit {
   title: string;
   userId: number;
+  completed: boolean;
 
   constructor(
     private todoService: TodoService,
@@ -34,6 +35,7 @@ export class TodoFormComponent implements OnInit {
       .subscribe((todo: Todo) => {
         this.userId = todo.userId;
         this.title = todo.title;
+        this.completed = todo.completed;
         this.cd.markForCheck();
       });
   }
